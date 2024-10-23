@@ -1,0 +1,17 @@
+*.sh
+*.md
+*.woff
+*.ttf
+.vscode
+.idea
+.husky
+.local
+Dockerfile
+node_modules
+dist
+public
+docs
+bin
+types
+src/vite-env.d.ts
+.eslintrc
