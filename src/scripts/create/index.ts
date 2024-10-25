@@ -5,6 +5,7 @@ import path from 'node:path';
 import fsPromises from 'node:fs/promises';
 import getInquirerResult from './inquirer';
 import { downloadAsync } from '@/utils/plugin';
+import { installDependencies } from './installDeps';
 
 export default async function clone(createName: string, createOption?: { force: boolean }) {
   const spinner = ora('模板下载中...');
@@ -30,6 +31,8 @@ export default async function clone(createName: string, createOption?: { force: 
     await replaceIndexHtml(destination, name);
 
     // TODO 安装依赖
+    spinner.info('开始安装依赖！！！');
+    await installDependencies(name);
 
     spinner.succeed('项目创建成功！！！');
     spinner.succeed('😊😊😊');

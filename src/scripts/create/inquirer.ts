@@ -26,3 +26,14 @@ export default function getInquirerResult(createName: string) {
     },
   ]);
 }
+
+export const getPackageManager = () => {
+  return inquirer.prompt([
+    {
+      type: 'list',
+      message: '请选择包管理工具',
+      name: 'packageManager',
+      choices: ['npm', 'pnpm', 'yarn'],
+    },
+  ]);
+};
