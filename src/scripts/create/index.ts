@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import fs from 'node:fs';
 import path from 'node:path';
 import fsPromises from 'node:fs/promises';
-import getInquirerResult from './inquirer';
+import getInquirerResult, { installDependencies } from './inquirer';
 import { downloadAsync } from '@/utils/plugin';
 
 export default async function clone(createName: string, createOption?: { force: boolean }) {
@@ -30,6 +30,7 @@ export default async function clone(createName: string, createOption?: { force: 
     await replaceIndexHtml(destination, name);
 
     // TODO 安装依赖
+    installDependencies(name)
 
     spinner.succeed('项目创建成功！！！');
     spinner.succeed('😊😊😊');
