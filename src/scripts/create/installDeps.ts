@@ -8,9 +8,9 @@ const exec = util.promisify(childProcess.exec);
 import { getPackageManager } from './inquirer';
 
 export const LOCKS: any = {
-    'package-lock.json': 'npm',
-    'pnpm-lock.yaml': 'pnpm',
-    'yarn.lock': 'yarn',
+  'package-lock.json': 'npm',
+  'pnpm-lock.yaml': 'pnpm',
+  'yarn.lock': 'yarn',
 };
 
 /**
@@ -20,16 +20,16 @@ export const LOCKS: any = {
  * @returns {string} - 找到的文件的完整路径，或空字符串（如果未找到）
  */
 const findUp = (files: string[]): string => {
-    let foundLockFile = '';
-    for (let index = 0; index < files.length; index++) {
-        const file = files[index];
-        const filePath = path.join(process.cwd(), file);
-        if (fs.existsSync(filePath)) {
-            foundLockFile = filePath;
-            break;
-        }
+  let foundLockFile = '';
+  for (let index = 0; index < files.length; index++) {
+    const file = files[index];
+    const filePath = path.join(process.cwd(), file);
+    if (fs.existsSync(filePath)) {
+      foundLockFile = filePath;
+      break;
     }
-    return foundLockFile;
+  }
+  return foundLockFile;
 };
 
 /**
@@ -38,35 +38,35 @@ const findUp = (files: string[]): string => {
  * @returns {Promise<string>} 返回一个包含包管理工具名称的Promise对象。
  */
 export const detect = () => {
-    return new Promise((resolve) => {
-        let agent = '';
-        const packageJsonPath = path.join(process.cwd(), 'package.json');
-        // package.json中配置了
-        if (fs.existsSync(packageJsonPath)) {
-            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-            const packageManager = (packageJson as any).packageManager || '';
-            packageManager && (agent = packageManager.split('@')[0]);
-        }
-        if (agent) {
-            resolve(agent);
-            return;
-        }
-        // 有lock文件
-        const lockFilePath = findUp(Object.keys(LOCKS));
-        if (fs.existsSync(lockFilePath)) {
-            const lockFileType = path.basename(lockFilePath);
-            agent = LOCKS[lockFileType];
-        }
-        if (agent) {
-            resolve(agent);
-            return;
-        }
+  return new Promise((resolve) => {
+    let agent = '';
+    const packageJsonPath = path.join(process.cwd(), 'package.json');
+    // package.json中配置了
+    if (fs.existsSync(packageJsonPath)) {
+      const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+      const packageManager = (packageJson as any).packageManager || '';
+      packageManager && (agent = packageManager.split('@')[0]);
+    }
+    if (agent) {
+      resolve(agent);
+      return;
+    }
+    // 有lock文件
+    const lockFilePath = findUp(Object.keys(LOCKS));
+    if (fs.existsSync(lockFilePath)) {
+      const lockFileType = path.basename(lockFilePath);
+      agent = LOCKS[lockFileType];
+    }
+    if (agent) {
+      resolve(agent);
+      return;
+    }
 
-        // 手动选择
-        getPackageManager().then((answers) => {
-            resolve(answers.packageManager);
-        });
+    // 手动选择
+    getPackageManager().then((answers) => {
+      resolve(answers.packageManager);
     });
+  });
 };
 
 /**
@@ -77,22 +77,22 @@ export const detect = () => {
  * 如果安装过程中出现错误，会打印错误信息并退出进程。
  */
 export const installDependencies = async (projectName: string) => {
-    process.chdir(projectName);
+  process.chdir(projectName);
 
-    const gitDir = path.join(process.cwd(), '.git');
-    if (!fs.existsSync(gitDir)) {
-        await exec('git init')
-    }
+  const gitDir = path.join(process.cwd(), '.git');
+  if (!fs.existsSync(gitDir)) {
+    await exec('git init');
+  }
 
-    const agent = await detect();
-    const spinner = ora('Start install...');
-    spinner.start();
-    const { stdout, stderr } = await exec(`${agent} install`);
-    if (stderr) {
-        spinner.fail(stderr);
-        process.exit();
-    }
-    spinner.info(stdout);
-    spinner.info(chalk.green(`\n cd ${projectName} 目录 && git remote add origin <origin> && ...\n`));
+  const agent = await detect();
+  const spinner = ora('Start install...');
+  spinner.start();
+  const { stdout, stderr } = await exec(`${agent} install`);
+  if (stderr) {
+    spinner.fail(stderr);
     process.exit();
+  }
+  spinner.info(stdout);
+  spinner.info(chalk.green(`\n cd ${projectName} 目录 && git remote add origin <origin> && ...\n`));
+  process.exit();
 };

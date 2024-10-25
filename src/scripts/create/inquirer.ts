@@ -36,4 +36,4 @@ export const getPackageManager = () => {
       choices: ['npm', 'pnpm', 'yarn'],
     },
   ]);
-}
+};
