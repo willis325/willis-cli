@@ -24,6 +24,7 @@ willis-cli -h
 | create   | 根据 git 模板仓库快速创建一个新的项目             | -f --force 强制覆盖  |
 | deploy   | 重新构建 docker 镜像，并重启镜像服务              |                     |
 | publish  | 更新 master 主干，适用于 dev/master 模型分支仓库  |                     |
+| show     | 查看本地/远程分支的详细信息                       |                     |
 
 
 ## create
@@ -50,4 +51,13 @@ willis-cli publish
 
 ```sh
 willis-cli deploy <container-name>
+```
+
+## show
+｜ 查看本地/远程分支的详细信息
+
+```sh
+willis-cli show [branch-name]
+willis-cli show
+willis-cli show origin/master
 ```

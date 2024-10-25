@@ -33,7 +33,7 @@ export default async function publish() {
     await spinnerInfoPromise(spinner, prefixSyncResult('git push', execStdout('git push origin master')));
     await spinnerInfoPromise(
       spinner,
-      prefixSyncResult('git log', execStdout('git log --since="today" --pretty=format:"%nAuthor: %an %nDate: %cd %nCommit: %H %nMessage: %s" --date=iso')),
+      prefixSyncResult('git log', execStdout('git log --since="today 00:00:00" --pretty=format:"%nAuthor: %an %nDate: %cd %nCommit: %H %nMessage: %s" --date=iso')),
     );
     await spinnerInfoPromise(
       spinner,

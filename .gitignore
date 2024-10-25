@@ -49,3 +49,5 @@ src/environments/environment.ts
 # locks
 package-lock.json
 yarn.lock
+
+/bin

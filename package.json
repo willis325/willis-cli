@@ -1,7 +1,7 @@
 {
   "name": "willis-cli",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "常用功能脚手架工具，支持克隆模板项目仓库、更新git仓库 master 主干分支、docker 镜像构建与重启等",
   "author": "willis<793207918@qq.com>",
   "license": "MIT",

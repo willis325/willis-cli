@@ -3,12 +3,12 @@ import chalk from 'chalk';
 import fs from 'node:fs';
 import path from 'node:path';
 import fsPromises from 'node:fs/promises';
-import getCloneInfo from './inquirer';
+import getInquirerResult from './inquirer';
 import { downloadAsync } from '@/utils/plugin';
 
 export default async function clone(createName: string, createOption?: { force: boolean }) {
   const spinner = ora('模板下载中...');
-  const { name, repo } = await getCloneInfo(createName);
+  const { name, repo } = await getInquirerResult(createName);
 
   try {
     spinner.start();
@@ -19,8 +19,8 @@ export default async function clone(createName: string, createOption?: { force: 
     await checkDirExists(!!createOption?.force, destination);
 
     // 2、从远程仓库下载
-    const url = (repo.endsWith('.zip') || repo.endsWith('.git') ? 'direct:' : '') + repo;
-    const param = repo.endsWith('.git') ? { clone: true } : {};
+    const url = (repo.includes('.zip') || repo.includes('.git') ? 'direct:' : '') + repo;
+    const param = repo.includes('.git') ? { clone: true } : {};
     await downloadAsync(url, destination, param);
 
     // 3、修改文件内容 package.json name

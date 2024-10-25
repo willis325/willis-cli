@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 
-export default function getCloneInfo(createName: string) {
+export default function getInquirerResult(createName: string) {
   return inquirer.prompt([
     {
       name: 'name',
