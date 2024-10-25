@@ -30,7 +30,7 @@ export default async function clone(createName: string, createOption?: { force: 
     await replaceIndexHtml(destination, name);
 
     // TODO 安装依赖
-    installDependencies(name)
+    installDependencies(name);
 
     spinner.succeed('项目创建成功！！！');
     spinner.succeed('😊😊😊');

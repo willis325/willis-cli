@@ -38,7 +38,6 @@ export default function getInquirerResult(createName: string) {
   ]);
 }
 
-
 /**
  * 在当前工作目录及其父目录中查找指定的文件列表中的第一个存在的文件，并返回其完整路径。
  * 如果找不到任何文件，则返回空字符串。
@@ -82,7 +81,6 @@ export const detect = () => {
     if (fs.existsSync(lockFilePath)) {
       const lockFileType = path.basename(lockFilePath);
       agent = LOCKS[lockFileType];
-
     }
     if (agent) {
       resolve(agent);
@@ -126,4 +124,3 @@ export const installDependencies = async (projectName: string) => {
   spinner.info(chalk.green(`\n cd ${projectName} 目录 && git remote add origin <origin> && ...\n`));
   process.exit();
 };
-
