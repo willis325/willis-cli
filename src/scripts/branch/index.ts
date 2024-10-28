@@ -12,21 +12,12 @@ export default async function branch(defaultName?: string) {
     spinner.start();
 
     const currentName = await execStdout('git branch --show-current');
+    const remoteUrl = await execStdout('git remote get-url origin');
     const branchName = name && name.startsWith('origin/') ? name.replace(/^origin\//, '') : name ? name : currentName.trim();
 
     await spinnerInfoPromise(
       spinner,
-      execStdout(`
-REMOTE_URL=$(git remote get-url origin) 
-git log ${name} -1 --pretty=format:"
-提交人: %an 
-提交日期: %cd 
-分支名: ${branchName} 
-版本号: %H 
-远程地址: $REMOTE_URL
-提交日志: %s 
-" --date=iso
-      `),
+      execStdout(`git log ${name} -1 --pretty=format:"%n提交人: %an %n提交日期: %cd %n分支名: ${branchName} %n版本号: %H %n远程地址: ${remoteUrl} %n提交日志: %s" --date=iso`),
     );
 
     spinner.succeed('分支信息！！！');
