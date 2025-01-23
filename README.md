@@ -17,15 +17,40 @@ npm install -g willis-cli
 willis-cli -h
 ```
 
+
+
 # 命令
 
-| command | description                                  | options             |
-| ------- | -------------------------------------------- | ------------------- |
-| create   | 根据 git 模板仓库快速创建一个新的项目             | -f --force 强制覆盖  |
-| deploy   | 重新构建 docker 镜像，并重启镜像服务              |                     |
-| publish  | 更新 master 主干，适用于 dev/master 模型分支仓库  |                     |
-| show     | 查看本地/远程分支的详细信息                       |                     |
-
+<table>
+  <tr>
+    <th>Command</th>
+    <th>Description</th>
+    <th>Options</th>
+  </tr>
+  <tr>
+    <td rowspan="2">create</td>
+    <td rowspan="2">根据 git 模板仓库快速创建一个新的项目</td>
+    <td>-f --force 强制覆盖</td>
+  </tr>
+  <tr>
+    <td>-t --template <模板名称> 指定模板快速创建</td>
+  </tr>
+  <tr>
+    <td>deploy</td>
+    <td>重新构建 docker 镜像，并重启镜像服务</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>publish</td>
+    <td>更新 master 主干，适用于 dev/master 模型分支仓库</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>show</td>
+    <td>查看本地/远程分支的详细信息</td>
+    <td></td>
+  </tr>
+</table>
 
 ## create
 
@@ -35,6 +60,7 @@ willis-cli -h
 willis-cli create [project-name] [options]
 willis-cli create
 willis-cli create vue3-willis-admin -f
+willis-cli create my-uniapp -t fast-vue-h5
 ```
 
 ## publish

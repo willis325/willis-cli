@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 
-export default function getInquirerResult(createName: string) {
+export default function getInquirerResult(createName?: string, template?: string) {
   return inquirer.prompt([
     {
       name: 'name',
@@ -14,6 +14,7 @@ export default function getInquirerResult(createName: string) {
     {
       name: 'repo',
       type: 'input',
+      when: !template,
       message: `请输入你要克隆的模板仓库 git 地址
   ${chalk.gray('GitHub - github:owner/name or simply owner/name')}
   ${chalk.gray('GitLab - gitlab:owner/name')}

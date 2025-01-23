@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.2] - 2025-01-23
+### Added
+- 新增 `create` 命令中的 `-t --template` 参数，用于指定 git 模板仓库快速创建
+
 ## [1.1.1] - 2024-10-28
 ### Fixed
 - 修复 `show` 命令中 git log 在 windows 下输出异常

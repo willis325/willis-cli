@@ -6,9 +6,9 @@ import fsPromises from 'node:fs/promises';
 import getInquirerResult from './inquirer';
 import { downloadAsync } from '@/utils/plugin';
 
-export default async function clone(createName: string, createOption?: { force: boolean }) {
+export default async function clone(createName?: string, createOption?: { force: boolean; template: string }) {
   const spinner = ora('模板下载中...');
-  const { name, repo } = await getInquirerResult(createName);
+  const { name, repo } = await getNameAndRepo(createName, createOption?.template);
 
   try {
     spinner.start();
@@ -36,6 +36,17 @@ export default async function clone(createName: string, createOption?: { force: 
   } catch (error) {
     spinner.fail(chalk.red(error));
     process.exit(1);
+  }
+}
+
+async function getNameAndRepo(createName?: string, template?: string) {
+  if (createName && template) {
+    return { name: createName.trim(), repo: template.includes('/') ? template.trim() : `willis325/${template.trim()}` };
+  } else if (!createName && template) {
+    const inquirerRes = await getInquirerResult(createName, template);
+    return { name: inquirerRes.name, repo: template.includes('/') ? template.trim() : `willis325/${template.trim()}` };
+  } else {
+    return await getInquirerResult(createName);
   }
 }
 

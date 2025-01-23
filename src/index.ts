@@ -13,6 +13,7 @@ program.name(pkg.name).usage('<command> [options]').description(chalk.greenBrigh
 program
   .command('create [project-name]')
   .description(chalk.green('根据 git 模板仓库快速创建一个新的项目'))
+  .option('-t --template <template>', chalk.green('指定github的模板仓库'))
   .option('-f --force', chalk.green('强制覆盖，如果当前目录已存在同名目录'))
   .action(create);
 
