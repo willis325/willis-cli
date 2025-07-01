@@ -8,9 +8,10 @@ export default defineConfig({
   target: 'node16',
 
   clean: true,
-  minify: true,
   treeshake: true,
   sourcemap: false,
+  minify: 'terser',
+  terserOptions: { compress: { drop_console: true, drop_debugger: true } },
   ignoreWatch: ['bin', 'package*.json', 'types'],
   external: ['chalk', 'ora', 'inquirer'],
 });

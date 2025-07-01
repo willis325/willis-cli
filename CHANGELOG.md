@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.2.0] - 2025-06-25
+### Added
+- 新增一个脚本命令
+  - `release` 更新预发布 dev 分支，适用于 dev/master 模型分支仓库
+- 新增 `show` 命令中的 `-l --local` 参数，用于指定当前分支
+
+### Changed
+- 优化 `tsup` 打包配置
+- 新增 `util` 工具函数
+- 优化项目目录结构
+
 ## [1.1.2] - 2025-01-23
 ### Added
 - 新增 `create` 命令中的 `-t --template` 参数，用于指定 git 模板仓库快速创建

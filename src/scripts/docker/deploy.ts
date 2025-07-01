@@ -2,15 +2,15 @@ import ora from 'ora';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import { execStdout } from '@/utils/node';
-import { spinnerInfoPromise } from '@/utils/spinner';
+import { spinnerInfo } from '@/utils/util';
 
 export default async function reup(projectName: string) {
   const spinner = ora('docker命令运行中...');
 
   try {
     spinner.start();
-    await spinnerInfoPromise(spinner, execStdout('docker ps -a'));
-    await spinnerInfoPromise(spinner, execStdout('docker images'));
+    await spinnerInfo(spinner, execStdout('docker ps -a'));
+    await spinnerInfo(spinner, execStdout('docker images'));
 
     const { name } = await inquirer.prompt([
       {
@@ -36,7 +36,7 @@ export default async function reup(projectName: string) {
     spinner.info(`重新构建并重启${result}`);
 
     // 4、观察容器运行情况
-    await spinnerInfoPromise(spinner, execStdout('docker ps -a'));
+    await spinnerInfo(spinner, execStdout('docker ps -a'));
 
     spinner.succeed('项目更新成功！！！');
     spinner.succeed('😊😊😊');

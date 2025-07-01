@@ -1,8 +1,8 @@
 {
   "name": "willis-cli",
   "type": "module",
-  "version": "1.1.2",
-  "description": "常用功能脚手架工具，支持克隆模板项目仓库、更新git仓库 master 主干分支、docker 镜像构建与重启等",
+  "version": "1.2.0",
+  "description": "常用功能脚手架工具，支持克隆模板项目仓库、git 版本发布、版本预发布、查看分支信息、docker 镜像构建与重启等",
   "author": "willis<793207918@qq.com>",
   "license": "MIT",
   "homepage": "https://github.com/willis325/willis-cli",
@@ -58,6 +58,7 @@
     "eslint": "^8.57.1",
     "prettier": "^3.3.3",
     "simple-git-hooks": "^2.11.1",
+    "terser": "^5.43.1",
     "tsup": "^8.3.0",
     "typescript": "^5.6.3"
   }

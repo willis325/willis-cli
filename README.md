@@ -36,8 +36,13 @@ willis-cli -h
     <td>-t --template <模板名称> 指定模板快速创建</td>
   </tr>
   <tr>
-    <td>deploy</td>
-    <td>重新构建 docker 镜像，并重启镜像服务</td>
+    <td>show</td>
+    <td>查看本地/远程分支的详细信息</td>
+    <td>-l --local 指定当前分支</td>
+  </tr>
+  <tr>
+    <td>release</td>
+    <td>更新 dev 预发布分支，适用于 dev/master 模型分支仓库</td>
     <td></td>
   </tr>
   <tr>
@@ -46,8 +51,8 @@ willis-cli -h
     <td></td>
   </tr>
   <tr>
-    <td>show</td>
-    <td>查看本地/远程分支的详细信息</td>
+    <td>deploy</td>
+    <td>重新构建 docker 镜像，并重启镜像服务</td>
     <td></td>
   </tr>
 </table>
@@ -63,13 +68,32 @@ willis-cli create vue3-willis-admin -f
 willis-cli create my-uniapp -t fast-vue-h5
 ```
 
+## show
+｜ 查看本地/远程分支的详细信息
+
+```sh
+willis-cli show [branch-name]
+willis-cli show
+willis-cli show -l
+willis-cli show origin/master
+```
+
+## release
+
+| 更新预发布dev分支/代码白盒，适用于 dev/master 模型分支仓库
+
+```sh
+willis-cli release
+```
+
 ## publish
 
-| 更新线上服务，适用于 dev/master 模型分支仓库
+| 更新线上主干master分支，适用于 dev/master 模型分支仓库
 
 ```sh
 willis-cli publish
 ```
+
 
 ## deploy
 
@@ -79,11 +103,3 @@ willis-cli publish
 willis-cli deploy <container-name>
 ```
 
-## show
-｜ 查看本地/远程分支的详细信息
-
-```sh
-willis-cli show [branch-name]
-willis-cli show
-willis-cli show origin/master
-```
